@@ -355,7 +355,7 @@ export const mutations = {
   },
   StopWatchArryUD(state, { machineCode, StopWatchTime, StopWatchSecondsTime, StopWatchSecondsTimeStart, StopWatchSecondsTimeJust }) {
     try {
-      console.log("●●●●●"+machineCode+'----->'+StopWatchTime)
+      // console.log("●●●●●"+machineCode+'----->'+StopWatchTime)
       // state.StopWatchArry[machineCode][0] = StopWatchTime;
       // Vue.set(state.StopWatchArry[machineCode][0],StopWatchTime);
       Vue.set(state.StopWatchArry,machineCode,StopWatchTime);
@@ -854,7 +854,7 @@ export const getters = {
   
   getStopWatchArray: (state) => (tgtMachine) => {
     try {
-      console.log(tgtMachine +'----->'+state.StopWatchArry[(tgtMachine)][0]);
+      // console.log(tgtMachine +'----->'+state.StopWatchArry[(tgtMachine)][0]);
       // console.log(tgtMachine +'----->'+state.StopWatchArry[(tgtMachine)][0]);
       return state.StopWatchArry[(tgtMachine)]
     } catch (error) {
@@ -875,7 +875,7 @@ export const getters = {
   },
 
   getStopWatchSecondsArray:(state)=>(tgtMachine)=>{
-    return state.StopWatchSecondsArry[(tgtMachine)]
+    return state.StopWatchSecondsArry[(tgtMachine)][0]
   },
 
   getStopWatchArrayPrimitive:(state)=>{

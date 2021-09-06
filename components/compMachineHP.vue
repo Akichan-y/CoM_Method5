@@ -14,12 +14,15 @@
       elevation="20"
     >
       <v-container class="my-0 py-0 grey lighten-5">
-          <p class="my-0 text-right">
-            {{ getStopWatchSecondsArryJust }}==
-            {{get_sensingTimeArryJust}}---{{ getSensingStTime }}〜
-            <!-- {{getJustSensingTime}}---{{ getSensingStTime }}〜 -->
+          <p class="my-0 text-right" >
+            <!-- {{CycleJustHunByou}} -->
+            <!-- {{ getStopWatchSecondsArryJust }}=={{getCycleTimeByouArry}}=={{getCycleTimeByouArry-getStopWatchSecondsArryJust}}==
+            {{get_sensingTimeArryJust}}---{{ getSensingStTime }}〜 -->
+            <!-- {{getJustSensingTime}}--- -->
+            {{ getSensingStTime }}〜
           </p>
-        <v-row justify="center" class="mt-0" >
+        <v-row justify="center" class="mt-1" >
+          
           <div
             class="mt-0 green-circle btnLamp"
             v-if="getStatusData == 1"
@@ -56,62 +59,59 @@
 
 
         <v-row no-gutters class="mt-0 mb-0 pa-0 ">
-          <v-col cols="4" fluid class="mt-5 mb-0 mr-0 ml-0 pl-1">
-              <img :src="image_src" width="100%"  onerror="this.onerror=null;this.src='~/assets/img/photo.png'">
+          <v-col cols="6" fluid class="mt-8 mb-0 mr-0 ml-0 pl-1">
+              <svg width="100" height="100" class = "pi_graph" viewBox = "0 0 50 50" my-0>
+
+                <circle  cx = "50%" cy = "50%" r = "15.9154" 
+                        stroke="black"
+                        stroke-dashoffset="0" my-0
+                        fill="none"
+                        stroke-width="16"
+                        stroke-dasharray="100"/>
+
+                <circle class = "enko" cx = "50%" cy = "50%" r = "15.9154" 
+                        :stroke=myColorCircle 
+                        stroke-dashoffset="0" my-0/>
+
+                <circle class = "enko" cx = "50%" cy = "50%" r = "15.9154" 
+                        :stroke=myColorCircle2
+                        :stroke-dashoffset=myStrokeDashOffset2 my-0/>
+                <!-- <path id="p1" d="M 0,60 A 80 80 0 0 1 180,50" stroke="black" fill="none" /> -->
+                  <text x="8" y="40" stroke="white" stroke-width="4" font-weight="bold" fill="black" transform="rotate(90 20,40)" font-size="13" text-anchor="middle" >
+                    
+                    {{Math.round(myStrokeDashOffset2)}}%
+                  </text>
+                  <text x="8" y="40" stroke="none" fill="black" transform="rotate(90 20,40)" font-size="13" text-anchor="middle">
+                    
+                    {{Math.round(myStrokeDashOffset2)}}%
+                  </text>
+              </svg>
+
+
+          </v-col>
+          <v-col cols="6" fluid class="mt-5 mb-0 mr-0 ml-0 pl-1">
+            <v-row mt-2>
+              <p display="block" width="300px" class="my-1 px-2 mr-0 text-right font-weight-bold headline" :style="Beki2">
+              <!-- <p class="indigo--text my-1 mr-0 text-right  text--lighten-1 font-weight-bold headline" :style="Beki2"> -->
+
+              {{CycleJustHunByou}}
+              </p>
+            </v-row>
+            <v-row>
+              <img :src="image_src" width="auto" height="90" left="150px" display="block" text-align="center" onerror="this.onerror=null;this.src='~/assets/img/photo.png'">
+
+            </v-row>
+
+
 
           </v-col>
 
-          <v-col cols="8" class="mt-2">
-
-            <v-row class="mt-0 pa-0">
-              <v-col class="my-0 pa-0">
-                <p class="indigo--text ml-15 mt-1 mb-0 mr-1 pa-0 text-center text--lighten-2 font-weight-bold headline"> {{ getStopWatchArray }}</p>
-              </v-col>
-               
-             
-
-            </v-row>
-
-
-            <v-row class="mt-1   pa-0">
-              <v-col class="my-0 pa-0">
-                <p
-                  class="orange--text my-0 mr-1 text-right text--lighten-1 font-weight-bold headline"
-                >
-                  {{ getCycleCounterDataDDR }}回
-                </p>
-              </v-col>
-              <v-col class="my-1 pa-0">
-                <p
-                  class="orange--text my-0 mr-1 text-right  text--lighten-1 font-weight-bold headline"
-                >
-                  {{ calcMachineRateDDR }}%
-                </p>
-              </v-col>
-            </v-row>
-            <v-row class="mt-0 pa-0">
-              <v-col class="my-0 pa-0">
-                <p
-                  class="green--text my-0 mr-1 text-right text--lighten-1 font-weight-bold headline"
-                >
-                  {{ getCountData }}回
-                </p>
-              </v-col>
-              <v-col class="my-0 pa-0">
-                <p
-                  class="green--text my-0 mr-1 text-right text--lighten-1 font-weight-bold headline"
-                >
-                  {{ calcMachineRate }}%
-                </p>
-              </v-col>
-            </v-row>
-          </v-col>
         </v-row >
 
             <v-row class="mt-0 ml-2 pa-0">
-              <v-col class="my-0 ml-2 pa-0">
+              <v-col class="my-2 ml-2 pa-0">
                 <p
-                    class="my-5 mr-5 text-center text--lighten-1 font-weight-bold headline ObjStyleA"
+                    class="mt-1 mb-3 mr-5 text-center text--lighten-1 font-weight-bold headline ObjStyleA"
                     v-bind:style="Beki"
                 >
                    可動率  {{ calc_BekiDouRitsu }}%({{calc_ShinChokuKaisu(false)}})
@@ -119,49 +119,75 @@
 
               </v-col>
             </v-row>
-              <v-row class="mt-0 pa-0">
-          <v-col class="my-0 ml-5 pa-0 text-center">
-             マシン
-          </v-col>
-          <v-col class="my-0 pa-0  text-center">
-            脱着
-          </v-col>
-          <v-col class="my-0 pa-0  text-center" >
-            段取
-          </v-col>
-        </v-row>
+
+
+
         <v-row class="mt-0 pa-0">
           <v-col class="my-1 ml-5 pa-0  text-center">
             
 
             <!-- {{MachineHour}} -->
-            {{JikanHenkan(getNowMachineHour)}}
+            <!-- {{JikanHenkan(getNowMachineHour)}} -->
           </v-col>
           <v-col class="my-1 pa-0  text-center">
-            {{JikanHenkan(getNowDacchaku)}}
+            <!-- {{JikanHenkan(getNowDacchaku)}} -->
             <!-- {{DacchakuJikan}} -->
             <!-- {{current_MH}} -->
           </v-col>
           <v-col class="my-1 pa-0  text-center">
-            {{JikanHenkan(getNowDandori)}}
+            <!-- {{JikanHenkan(getNowDandori)}} -->
             <!-- {{DandoriJikan}} -->
             <!-- {{current_MH}} -->
           </v-col>
         </v-row>
         <!-- {{getM}} -->
-        <v-row my-0>
+          <v-row class="mt-0 mb-0   pa-0">
 
-          <svg width="500" height="50" my-5>
+              <v-col cols="3" class="my-0 pa-0">
+                <p
+                  class="orange--text my-0 mr-1 text-right text--lighten-1 font-weight-bold headline"
+                >
+                  {{ getCycleCounterDataDDR }}回
+                </p>
+              </v-col>
+
+              <v-col cols="3" class="my-0 pa-0">
+                <p
+                  class="orange--text my-0 mr-1 text-right text--lighten-1 font-weight-bold headline"
+                >
+                  {{ calcMachineRateDDR }}%
+                </p>
+              </v-col>
+
+              <v-col cols="3" class="my-0 pa-0">
+                <p
+                  class="green--text my-0 mr-1 text-right text--lighten-1 font-weight-bold headline"
+                >
+                  {{ getCountData }}回
+                </p>
+              </v-col>
+
+              <v-col cols="3" class="my-0 pa-0">
+                <p
+                  class="green--text my-0 mr-1 text-right text--lighten-1 font-weight-bold headline"
+                >
+                  {{ calcMachineRate }}%
+                </p>
+              </v-col>
+        </v-row>
+        <v-row class="mt-0">
+
+          <svg width="500" height="50" class="mt-0">
 
             <rect x="25" y="9" width="245" height="25" :fill=myColor3 stroke="blue" stroke-width="2" />
 
             <rect x="25" y="9" :width=myWidth2 height="25" :fill=myColor stroke="blue" stroke-width="2" />
             <text x="145" y="30" font-size="20" fill="rgva(0,255,0,0.5)" stroke="black" text-anchor="middle" stroke-width="0.1" >
-              {{JikanHenkan(getmachineHourCut)}}
+               {{JikanHenkan(getNowMachineHour)}}（{{JikanHenkan(getmachineHourCut)}}）
             </text>
 
           </svg>
-        </v-row>
+      </v-row>
 
       <v-row my-0>
 
@@ -217,7 +243,7 @@
       </v-row>
 
         <div  class="mt-3 ml=2 text-left caption font-size=12px" :class="{ contentTgt: isTgt }">
-          {{ getCurrentTarget }}
+          {{ getCurrentTarget }}              
         </div>
         <p class="grey--text mt-1 mb-0 ml-3 text-center  text--darken-1 font-weight-bold subtitle2">
           <!-- {{current_MH}} -->
@@ -229,7 +255,7 @@
         </p>
 
 
-        <v-btn @click="btn">クリック</v-btn>
+        <!-- <v-btn @click="btn">クリック</v-btn> -->
         
 
 
@@ -248,6 +274,41 @@
 </template>
 
 <style>
+.pi_graph {
+
+  transform-origin:center;
+  transform:rotate(-90deg);
+}
+
+.enko{
+  fill:none;
+  stroke-width:14;
+  stroke-dasharray:100;
+
+}
+
+
+
+/* #blue {
+
+  fill:none;
+  stroke:#00a0e9;
+  stroke-width:14;
+  stroke-dasharray:100;
+  stroke-dashoffset:25;
+}
+
+#yellow {
+
+    fill:none;
+    stroke:#d6e900;
+    stroke-width:14;
+    stroke-dasharray:100;
+} */
+
+
+
+
 .ObjStyleA{
   outline:1px solid grey;
   border-radius: 15px; /* まるみ */
@@ -382,7 +443,7 @@ export default {
     return {
       A_Data:0,
       myWidth:10,
-
+      myStrokeDashOffset:30,
       // ObjStyleBool:[true,false,false,false,false,false,false],
       isRed:true,
       isBlue:false,
@@ -466,6 +527,9 @@ export default {
       }
 
     },
+    CycleJustHunByou(){
+      return this.JikanHenkan(this.getCycleTimeByouArry-this.getStopWatchSecondsArryJust);
+    },
     getJustSensingTime(){
       return this.$store.getters["timeBank/getJustSensingTime"](this.nameAB);
       
@@ -476,6 +540,14 @@ export default {
     },
     getmachineHourCut(){
       return this.$store.getters['timeBank/getmachineHourCutArry'](this.nameAB)
+    },
+    myStrokeDashOffset2(){
+      let CycleTime = this.getCycleTimeByouArry;
+      let JustCycleTime = this.getStopWatchSecondsArryJust;
+      let NowCycleNokori = 100-((CycleTime - JustCycleTime)/CycleTime*100);
+      // console.log(NowCycleNokori);
+      return NowCycleNokori;
+
     },
      myWidth2(){
         this.A_Data = this.$store.getters["timeBank/getmachineHourCutArry"](this.nameAB);
@@ -529,8 +601,41 @@ export default {
               return 'lightgray';
           }
         },
+    myColorCircle(){
+      let NowData = this.myStrokeDashOffset2
+      switch(true){
+          case NowData >= 75 && NowData < 85:
+                return 'yellow';
+                break;
+          case NowData >= 85 && NowData < 95:
+                return 'pink';
+                break;
+          case NowData >= 95:
+                return 'deeppink';
+                break;
+          default:
+                return "gray";
+              
+      };
+    },
+    myColorCircle2(){
+      let NowData2 = this.myStrokeDashOffset2
+      switch(true){
 
-     Beki(){
+          case NowData2 < 100:
+                return 'rgb(0,255,0)';
+                break;
+          case NowData2 >= 100:
+                return 'black';
+                break;
+          default:
+                return "lightgray";
+              
+      };
+
+    },
+
+    Beki(){
        let NowChinchoku = Math.round(this.getCountData - this.calc_BekiKaisu);
 
         switch(true) {
@@ -590,6 +695,74 @@ export default {
                 break;
             default:
                 //=============================
+                //======================================
+        }
+    },
+     Beki2(){
+       let Shinchoku = this.getCycleTimeByouArry-this.getStopWatchSecondsArryJust;
+
+        switch(true) {
+            case Shinchoku < -0:
+                return{
+                  color:"white",
+                  background:"red"
+                }
+                break;
+            // case Shinchoku >= -20 && Shinchoku < -5:
+            //     return{
+            //       color:"white",
+            //       background:"red"
+            //     }
+            //     break;
+            // case Shinchoku >= -5 && Shinchoku < -3:
+            //     return{
+            //       color:"black",
+            //       background:"yellow"
+            //     }
+            //     break;
+            // case Shinchoku >= -3 && Shinchoku < 0 :
+            //     return{
+            //       color:"pink",
+            //       background:"white"
+            //     }
+            //     break;
+            // case Shinchoku >= 0 && Shinchoku < 1 :
+            //     return{
+            //       color:"blue",
+            //       background:"white"
+            //     }
+            //     break;
+            // case Shinchoku >= 1 && Shinchoku < 3 :
+            //     return{
+            //       color:"gray",
+            //       background:"white"
+            //     }
+            //     break;
+            // case Shinchoku >= 3 && Shinchoku < 7 :
+            //     return{
+            //       color:"gray",
+            //       background:"aqua"
+            //     }
+            //     break;
+            // case Shinchoku >= 7 && Shinchoku < 20 :
+            //     return{
+            //       color:"white",
+            //       background:"blue"
+            //     }
+            //     break;
+            // case Shinchoku >= 21:
+            //     return{
+            //       color:"#ff1493",
+            //       background:"blue"
+            //     }
+            //     break;
+            default:
+                //=============================
+                return{
+                  color:"blue",
+                  background:"white"
+                }
+                break;
                 //======================================
         }
     },
@@ -716,6 +889,7 @@ export default {
       //機械の現在稼働率
       let UntenSeconds = this.getTimeData;
       let KadouSeconds = this.$store.getters["timeBank/getProgressSeconds"];
+
       return (((UntenSeconds / KadouSeconds) * 10000) / 100).toFixed(1);
     },
     calcMachineRateDDR() {
@@ -792,9 +966,9 @@ export default {
         s = "00" + String(NowSeconds % 60);
         return `${m}分${s.slice(-2)}秒`
       }else{
-        m = Math.ceil(NowSeconds / 60);
+        m = Math.abs(Math.ceil(NowSeconds / 60));
         s = "00" + String(Math.abs(NowSeconds) % 60);
-        return `−${m}分${s.slice(-2)}秒`
+        return `▲${m}分${s.slice(-2)}秒`
       }
       
     },
